@@ -1,10 +1,11 @@
+import os
 from flask import Flask
 from db import db
 from flask_restful import Api
 from restaurant_routes import Restaurants, RestaurantMember
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URL'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 api = Api(app)
 @app.before_first_request
 def create_tables():
